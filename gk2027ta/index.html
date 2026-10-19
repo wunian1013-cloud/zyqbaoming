@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国考职位速览 · 税务岗</title>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0; padding: 0;
+    background: #f5f3fa;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+    color: #1f2937; line-height: 1.6; font-size: 16px;
+  }
+  .wrap { max-width: 480px; margin: 0 auto; padding: 12px 12px 40px; }
+
+  header {
+    background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+    color: #fff; border-radius: 14px; padding: 18px 16px; margin-bottom: 12px;
+  }
+  header h1 { margin: 0 0 4px; font-size: 20px; font-weight: 700; }
+  header p  { margin: 0; font-size: 13px; opacity: .85; }
+
+  .summary {
+    background: #fff; border-radius: 12px; padding: 12px; margin-bottom: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+  .summary h2 { font-size: 14px; color: #6b7280; margin: 0 0 10px; font-weight: 600; }
+
+  .grp-tag {
+    display: block; font-size: 12px; font-weight: 700; padding: 4px 8px;
+    border-radius: 6px; margin: 10px 0 6px;
+    background: #ede9fe; color: #5b21b6;
+  }
+
+  .summary table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .summary th, .summary td { padding: 7px 4px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+  .summary th { color: #6b7280; font-weight: 500; }
+  .summary td.place { color: #5b21b6; font-weight: 600; }
+  .summary td.num { color: #c05621; font-weight: 700; }
+  .summary td.org  { text-align: left; }
+
+  .group-title {
+    font-size: 13px; font-weight: 700; padding: 10px 4px 6px; margin-top: 6px;
+    color: #5b21b6; border-left: 4px solid #7c3aed; padding-left: 8px;
+  }
+
+  .card {
+    background: #fff; border-radius: 14px; padding: 16px; margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(91,33,182,.08);
+    border-top: 3px solid #7c3aed;
+  }
+
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+  .job-title { font-size: 18px; font-weight: 700; color: #111827; line-height: 1.35; }
+  .job-code { font-size: 12px; color: #9ca3af; margin-top: 3px; }
+  .headcount {
+    flex-shrink: 0; background: #c05621; color: #fff; border-radius: 8px;
+    padding: 6px 10px; text-align: center; line-height: 1.2;
+  }
+  .headcount .n { font-size: 20px; font-weight: 700; display: block; }
+  .headcount .u { font-size: 11px; opacity: .9; }
+
+  .dept { font-size: 14px; color: #374151; margin: 10px 0 6px; }
+  .dept b { color: #111827; }
+  .chips { margin-bottom: 8px; }
+  .chip {
+    display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px;
+    margin: 0 6px 6px 0;
+  }
+  .chip.blue  { background: #ede9fe; color: #5b21b6; }
+  .chip.green { background: #e6f0ea; color: #22543d; }
+  .chip.hard  { background: #fef3e7; color: #c05621; }
+  .chip.other { background: #f0f0f0; color: #4b5563; }
+
+  .kv {
+    background: #faf8ff; border-radius: 10px; padding: 10px 12px; margin: 10px 0;
+  }
+  .kv .row {
+    display: flex; justify-content: space-between; gap: 10px;
+    padding: 6px 0; border-bottom: 1px dashed #e5e7eb; font-size: 14px;
+  }
+  .kv .row:last-child { border-bottom: none; }
+  .kv .k { color: #6b7280; flex-shrink: 0; }
+  .kv .v { color: #111827; font-weight: 600; text-align: right; }
+
+  .major {
+    background: #fff8e6; border-left: 3px solid #d69e2e;
+    padding: 10px 12px; border-radius: 0 8px 8px 0; margin: 10px 0; font-size: 14px;
+  }
+  .major .k { font-size: 12px; color: #975a16; font-weight: 700; display: block; margin-bottom: 2px; }
+  .duty { font-size: 14px; color: #374151; margin: 8px 0; }
+
+  .notes {
+    font-size: 13px; color: #b7791f; background: #fffbeb;
+    padding: 8px 10px; border-radius: 8px; margin: 8px 0;
+  }
+
+  .contact {
+    font-size: 12.5px; color: #4b5563; background: #f9fafb;
+    border: 1px solid #eceef2; border-radius: 8px;
+    padding: 8px 10px; margin: 8px 0 0;
+  }
+  .contact b { color: #374151; }
+  .contact a { color: #6d28d9; text-decoration: none; word-break: break-all; }
+
+  footer { text-align: center; font-size: 11px; color: #9ca3af; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>陕西 · 国考职位速览 <span style="font-size:14px;font-weight:400;opacity:.85">税务篇</span></h1>
+    <p>共 3 个岗位 · 招考 8 人 · 手机竖屏重排版</p>
+  </header>
+
+  <!-- 一眼对比 -->
+  <div class="summary">
+    <h2>▍一眼对比</h2>
+
+    <span class="grp-tag">中央国家行政机关 · 省级以下直属机构（3 岗 / 8 人）· 均为国家税务总局陕西省税务局</span>
+    <table>
+      <tr><th>用人单位</th><th>地点</th><th>人数</th><th>学历</th></tr>
+      <tr><td class="org">西安经开区税务局</td><td class="place">西安</td><td class="num">4</td><td>本科及以上</td></tr>
+      <tr><td class="org">勉县税务局</td><td class="place">汉中勉县</td><td class="num">2</td><td>本科及以上</td></tr>
+      <tr><td class="org">安康高新区税务局</td><td class="place">安康</td><td class="num">2</td><td>本科及以上</td></tr>
+    </table>
+    <div style="font-size:12px;color:#6b7280;margin-top:8px;">
+      三个岗位条件完全一致：本科及以上 · 不限政治面貌 · 无基层年限要求 · 面试 3:1 · 服务期 5 年。
+      差别只在地点和招考人数。
+    </div>
+  </div>
+
+  <!-- ===== 岗位卡片 ===== -->
+  <div class="group-title">中央国家行政机关 · 省级以下直属机构</div>
+
+  <!-- 岗位1 西安经开区 -->
+  <div class="card">
+    <div class="card-top">
+      <div>
+        <div class="job-title">一级行政执法员（九）</div>
+        <div class="job-code">职位代码 300110115009 · 部门代码 130132</div>
+      </div>
+      <div class="headcount"><span class="n">4</span><span class="u">人</span></div>
+    </div>
+    <div class="dept"><b>国家税务总局陕西省税务局</b><br>· 国家税务总局西安经济技术开发区税务局</div>
+    <div class="chips">
+      <span class="chip hard">西部艰苦边远地区</span>
+      <span class="chip blue">县（区）级及以下</span>
+      <span class="chip other">行政执法类</span>
+    </div>
+    <div class="kv">
+      <div class="row"><span class="k">工作地点</span><span class="v">陕西省西安市</span></div>
+      <div class="row"><span class="k">落户地点</span><span class="v">陕西省西安市</span></div>
+      <div class="row"><span class="k">学历</span><span class="v">本科及以上</span></div>
+      <div class="row"><span class="k">学位</span><span class="v">与最高学历相对应的学位</span></div>
+      <div class="row"><span class="k">政治面貌</span><span class="v">不限</span></div>
+      <div class="row"><span class="k">基层工作最低年限</span><span class="v">无限制</span></div>
+      <div class="row"><span class="k">服务基层项目经历</span><span class="v">无限制</span></div>
+      <div class="row"><span class="k">面试人员比例</span><span class="v">3 : 1</span></div>
+      <div class="row"><span class="k">面试阶段专业能力测试</span><span class="v">否</span></div>
+    </div>
+    <div class="major">
+      <span class="k">招录专业</span>
+      管理科学与工程类、工商管理类、公共管理类
+    </div>
+    <div class="duty">▸ 职位简介：基层税收管理。</div>
+    <div class="notes">⚠ 在本单位最低服务年限为 5 年。招考 4 人，三个岗里名额最多。</div>
+    <div class="contact">
+      <b>咨询</b> 029-87695390 · 029-87695085 · 029-12366-3-9<br>
+      <b>网站</b> <a href="https://shaanxi.chinatax.gov.cn" target="_blank" rel="noopener">shaanxi.chinatax.gov.cn</a>
+    </div>
+  </div>
+
+  <!-- 岗位2 勉县 -->
+  <div class="card">
+    <div class="card-top">
+      <div>
+        <div class="job-title">一级行政执法员（二）</div>
+        <div class="job-code">职位代码 300110704002 · 部门代码 130132</div>
+      </div>
+      <div class="headcount"><span class="n">2</span><span class="u">人</span></div>
+    </div>
+    <div class="dept"><b>国家税务总局陕西省税务局</b><br>· 国家税务总局勉县税务局</div>
+    <div class="chips">
+      <span class="chip hard">西部艰苦边远地区</span>
+      <span class="chip blue">县（区）级及以下</span>
+      <span class="chip other">行政执法类</span>
+    </div>
+    <div class="kv">
+      <div class="row"><span class="k">工作地点</span><span class="v">陕西省汉中市勉县</span></div>
+      <div class="row"><span class="k">落户地点</span><span class="v">陕西省汉中市勉县</span></div>
+      <div class="row"><span class="k">学历</span><span class="v">本科及以上</span></div>
+      <div class="row"><span class="k">学位</span><span class="v">与最高学历相对应的学位</span></div>
+      <div class="row"><span class="k">政治面貌</span><span class="v">不限</span></div>
+      <div class="row"><span class="k">基层工作最低年限</span><span class="v">无限制</span></div>
+      <div class="row"><span class="k">服务基层项目经历</span><span class="v">无限制</span></div>
+      <div class="row"><span class="k">面试人员比例</span><span class="v">3 : 1</span></div>
+      <div class="row"><span class="k">面试阶段专业能力测试</span><span class="v">否</span></div>
+    </div>
+    <div class="major">
+      <span class="k">招录专业</span>
+      管理科学与工程类、工商管理类、公共管理类
+    </div>
+    <div class="duty">▸ 职位简介：基层税收管理。</div>
+    <div class="notes">⚠ 在本单位最低服务年限为 5 年。</div>
+    <div class="contact">
+      <b>咨询</b> 029-87695390 · 029-87695085 · 029-12366-3-9<br>
+      <b>网站</b> <a href="https://shaanxi.chinatax.gov.cn" target="_blank" rel="noopener">shaanxi.chinatax.gov.cn</a>
+    </div>
+  </div>
+
+  <!-- 岗位3 安康高新区 -->
+  <div class="card">
+    <div class="card-top">
+      <div>
+        <div class="job-title">一级行政执法员（一）</div>
+        <div class="job-code">职位代码 300110811001 · 部门代码 130132</div>
+      </div>
+      <div class="headcount"><span class="n">2</span><span class="u">人</span></div>
+    </div>
+    <div class="dept"><b>国家税务总局陕西省税务局</b><br>· 国家税务总局安康高新技术产业开发区税务局</div>
+    <div class="chips">
+      <span class="chip hard">西部艰苦边远地区</span>
+      <span class="chip blue">县（区）级及以下</span>
+      <span class="chip other">行政执法类</span>
+    </div>
+    <div class="kv">
+      <div class="row"><span class="k">工作地点</span><span class="v">陕西省安康市</span></div>
+      <div class="row"><span class="k">落户地点</span><span class="v">陕西省安康市</span></div>
+      <div class="row"><span class="k">学历</span><span class="v">本科及以上</span></div>
+      <div class="row"><span class="k">学位</span><span class="v">与最高学历相对应的学位</span></div>
+      <div class="row"><span class="k">政治面貌</span><span class="v">不限</span></div>
+      <div class="row"><span class="k">基层工作最低年限</span><span class="v">无限制</span></div>
+      <div class="row"><span class="k">服务基层项目经历</span><span class="v">无限制</span></div>
+      <div class="row"><span class="k">面试人员比例</span><span class="v">3 : 1</span></div>
+      <div class="row"><span class="k">面试阶段专业能力测试</span><span class="v">否</span></div>
+    </div>
+    <div class="major">
+      <span class="k">招录专业</span>
+      管理科学与工程类、工商管理类、公共管理类
+    </div>
+    <div class="duty">▸ 职位简介：基层税收管理。</div>
+    <div class="notes">⚠ 在本单位最低服务年限为 5 年。</div>
+    <div class="contact">
+      <b>咨询</b> 029-87695390 · 029-87695085 · 029-12366-3-9<br>
+      <b>网站</b> <a href="https://shaanxi.chinatax.gov.cn" target="_blank" rel="noopener">shaanxi.chinatax.gov.cn</a>
+    </div>
+  </div>
+
+  <footer>数据来源：2027 国考招考职位表（陕西）· 整理于 2026-10-19</footer>
+</div>
+</body>
+</html>
